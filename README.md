@@ -78,4 +78,6 @@ Everything narrative lives in `story_arcs.json` — no code changes needed to ad
 - Cabinet is currently read-only; reassigning or firing ministers would be a natural next
   feature (the `Minister` model and `CabinetScreen` are already set up to extend easily).
 
+
+
  
