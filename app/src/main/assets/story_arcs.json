@@ -1,0 +1,223 @@
+{
+  "nodes": [
+    {
+      "id": "intro_1",
+      "arc": "opening",
+      "type": "dialogue",
+      "speaker": "Chief of Staff, Ana Reyes",
+      "text": "Madam President, the inauguration crowd is waiting. Kastoria has not had a peaceful transfer of power in a generation, and every word you say today will be dissected. How do you want to open your address?",
+      "choices": [
+        {
+          "text": "Speak plainly to the people — promise to fight for them directly.",
+          "effects": [{"stat": "approval", "delta": 8}, {"stat": "stability", "delta": -3}],
+          "setFlags": ["populist"],
+          "next": "intro_budget"
+        },
+        {
+          "text": "Speak carefully and technically — promise steady, competent governance.",
+          "effects": [{"stat": "stability", "delta": 6}, {"stat": "approval", "delta": -2}],
+          "setFlags": ["technocrat"],
+          "next": "intro_budget"
+        }
+      ]
+    },
+    {
+      "id": "intro_budget",
+      "arc": "opening",
+      "type": "budget",
+      "text": "Your first act in office: set the national budget priorities for the coming term. Adjust each ministry's share of spending.",
+      "choices": [{"text": "Confirm Budget", "next": "intro_cabinet"}]
+    },
+    {
+      "id": "intro_cabinet",
+      "arc": "opening",
+      "type": "cabinet",
+      "text": "Your cabinet awaits your first full meeting. Review the ministers who will carry out your agenda.",
+      "choices": [{"text": "Begin governing", "next": "crisis_trigger"}]
+    },
+    {
+      "id": "crisis_trigger",
+      "arc": "economic_crisis",
+      "type": "dialogue",
+      "speaker": "Finance Minister, Dorin Albescu",
+      "text": "Madam President, the kastor has lost a third of its value overnight. Foreign reserves are draining fast. We need a decision within the hour.",
+      "choices": [
+        {
+          "text": "Impose emergency austerity — cut spending, raise taxes.",
+          "effects": [{"stat": "economy", "delta": 10}, {"stat": "approval", "delta": -12}, {"stat": "corruption", "delta": -4}],
+          "setFlags": ["austerity"],
+          "next": "austerity_response"
+        },
+        {
+          "text": "Print currency and launch a stimulus package.",
+          "effects": [{"stat": "approval", "delta": 10}, {"stat": "economy", "delta": -10}],
+          "setFlags": ["stimulus"],
+          "next": "stimulus_response"
+        },
+        {
+          "text": "Negotiate a careful IMF bridge loan.",
+          "minStat": {"stat": "economy", "value": 55},
+          "effects": [{"stat": "economy", "delta": 4}, {"stat": "diplomacy", "delta": 6}, {"stat": "approval", "delta": -3}],
+          "setFlags": ["imf_loan"],
+          "next": "diplomacy_arc"
+        }
+      ]
+    },
+    {
+      "id": "austerity_response",
+      "arc": "economic_crisis",
+      "type": "dialogue",
+      "speaker": "Interior Minister, Yelena Kovak",
+      "text": "The austerity measures have hit hard, Madam President. There are demonstrations forming in the capital, and they are growing by the hour.",
+      "choices": [
+        {
+          "text": "This will pass. Hold the course.",
+          "minStat": {"stat": "approval", "value": 40},
+          "effects": [{"stat": "stability", "delta": 4}],
+          "next": "midgame_budget"
+        },
+        {
+          "text": "The streets are turning against us — this needs handling.",
+          "effects": [{"stat": "stability", "delta": -6}],
+          "next": "unrest_arc"
+        }
+      ]
+    },
+    {
+      "id": "stimulus_response",
+      "arc": "economic_crisis",
+      "type": "dialogue",
+      "speaker": "Defense Minister, Gen. Petar Milo",
+      "text": "Inflation is climbing fast, Madam President. Some officers in the garrison are muttering about instability. I'd rather you hear it from me first.",
+      "choices": [
+        {
+          "text": "Reassure the officer corps personally.",
+          "effects": [{"stat": "military", "delta": 6}, {"stat": "stability", "delta": 3}],
+          "next": "midgame_budget"
+        },
+        {
+          "text": "That sounds like a threat. Note it and move on.",
+          "effects": [{"stat": "military", "delta": -6}, {"stat": "stability", "delta": -4}],
+          "next": "military_arc"
+        }
+      ]
+    },
+    {
+      "id": "unrest_arc",
+      "arc": "unrest",
+      "type": "dialogue",
+      "speaker": "Gen. Petar Milo",
+      "text": "Madam President, the garrison commander is offering to clear the square by force before nightfall. He's waiting on your word.",
+      "choices": [
+        {
+          "text": "Authorize the crackdown.",
+          "effects": [{"stat": "stability", "delta": 10}, {"stat": "approval", "delta": -15}, {"stat": "corruption", "delta": 6}],
+          "setFlags": ["authoritarian"],
+          "next": "midgame_budget"
+        },
+        {
+          "text": "Refuse. Send negotiators instead.",
+          "effects": [{"stat": "approval", "delta": 8}, {"stat": "stability", "delta": -6}],
+          "next": "midgame_budget"
+        }
+      ]
+    },
+    {
+      "id": "military_arc",
+      "arc": "military",
+      "type": "dialogue",
+      "speaker": "Gen. Petar Milo",
+      "text": "Border patrols report movement from Tavria across the Solen river, Madam President. It could be a drill. It could be worse. What are your orders?",
+      "choices": [
+        {
+          "text": "Mobilize reserves to the border.",
+          "effects": [{"stat": "military", "delta": 10}, {"stat": "economy", "delta": -6}, {"stat": "diplomacy", "delta": -6}],
+          "setFlags": ["mobilized"],
+          "next": "midgame_budget"
+        },
+        {
+          "text": "Open a diplomatic channel instead.",
+          "effects": [{"stat": "diplomacy", "delta": 8}, {"stat": "military", "delta": -4}],
+          "next": "diplomacy_arc"
+        }
+      ]
+    },
+    {
+      "id": "diplomacy_arc",
+      "arc": "diplomacy",
+      "type": "dialogue",
+      "speaker": "Foreign Minister, Claudia Serban",
+      "text": "The Halvorn Union has offered Kastoria a mutual defense pact, Madam President. The terms are generous — perhaps too generous.",
+      "choices": [
+        {
+          "text": "Sign the pact.",
+          "effects": [{"stat": "diplomacy", "delta": 10}, {"stat": "corruption", "delta": 4}],
+          "setFlags": ["allied"],
+          "next": "midgame_budget"
+        },
+        {
+          "text": "Stay non-aligned.",
+          "effects": [{"stat": "stability", "delta": 5}, {"stat": "diplomacy", "delta": -5}],
+          "next": "midgame_budget"
+        }
+      ]
+    },
+    {
+      "id": "midgame_budget",
+      "arc": "midterm",
+      "type": "budget",
+      "text": "A year has passed. Time to revise the national budget for the second half of your term.",
+      "choices": [{"text": "Confirm Budget", "next": "midgame_cabinet"}]
+    },
+    {
+      "id": "midgame_cabinet",
+      "arc": "midterm",
+      "type": "cabinet",
+      "text": "Reshuffled or not, your cabinet meets to prepare for the final stretch before the election.",
+      "choices": [{"text": "Continue", "next": "finale_trigger"}]
+    },
+    {
+      "id": "finale_trigger",
+      "arc": "finale",
+      "type": "dialogue",
+      "speaker": "Ana Reyes",
+      "text": "Election day is a week away, Madam President. The nation is watching your final address. How will you close out your term?",
+      "choices": [
+        {
+          "text": "An honest accounting — the good and the bad.",
+          "effects": [{"stat": "approval", "delta": 3}],
+          "next": "AUTO_ENDING"
+        },
+        {
+          "text": "A triumphant victory lap, regardless of the numbers.",
+          "effects": [{"stat": "approval", "delta": 6}, {"stat": "corruption", "delta": 3}],
+          "next": "AUTO_ENDING"
+        }
+      ]
+    },
+    {
+      "id": "ending_reelected",
+      "arc": "finale",
+      "type": "ending",
+      "text": "Kastoria goes to the polls, and the results are not close. Whatever the cost, the country has decided it trusts you with a second term. History will judge the rest."
+    },
+    {
+      "id": "ending_ousted",
+      "arc": "finale",
+      "type": "ending",
+      "text": "The votes are counted, and Kastoria chooses a new path. You leave office having kept the republic intact, if not your own ambitions."
+    },
+    {
+      "id": "ending_authoritarian_grip",
+      "arc": "finale",
+      "type": "ending",
+      "text": "There is no real vote this time, only a formality. The garrison stands in the squares where the demonstrators once did. Kastoria is stable, and it is not free."
+    },
+    {
+      "id": "ending_collapse",
+      "arc": "finale",
+      "type": "ending",
+      "text": "The kastor is worthless, the treasury is empty, and your government falls before the election ever takes place. Kastoria will remember your name, but not kindly."
+    }
+  ]
+}

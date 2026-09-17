@@ -1,0 +1,8 @@
+{
+  "ministers": [
+    {"id": "fin", "name": "Dorin Albescu", "portfolio": "Finance", "ideology": "Market Liberal", "loyalty": 65, "competence": 72},
+    {"id": "def", "name": "Gen. Petar Milo", "portfolio": "Defense", "ideology": "Nationalist", "loyalty": 55, "competence": 68},
+    {"id": "for", "name": "Claudia Serban", "portfolio": "Foreign Affairs", "ideology": "Internationalist", "loyalty": 70, "competence": 75},
+    {"id": "int", "name": "Yelena Kovak", "portfolio": "Interior", "ideology": "Populist", "loyalty": 60, "competence": 58}
+  ]
+}
