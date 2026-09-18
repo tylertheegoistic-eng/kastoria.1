@@ -14,11 +14,11 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedButton
-import androidx.compose.material3.OutlinedButtonDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -88,7 +88,7 @@ fun EventScreen(
             OutlinedButton(
                 onClick = { onChoose(choice) },
                 shape = RoundedCornerShape(10.dp),
-                colors = OutlinedButtonDefaults.outlinedButtonColors(contentColor = GoldAccent),
+                colors = ButtonDefaults.outlinedButtonColors(contentColor = GoldAccent),
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(vertical = 5.dp)
